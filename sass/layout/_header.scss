@@ -1,0 +1,84 @@
+//各ファイルは必ず登録済みの変数を最初に読み込みます
+//as *で読み込みファイル名を省略することができます
+@use "../global" as *;
+
+.header {
+  position: fixed;
+  width: 260px;
+  height: 100vh;
+  padding: 65px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+
+  &__logo {
+    &.black {
+      .header__logo-img--white {
+        opacity: 0;
+      }
+
+      .header__logo-img--black {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__logo-link {
+    display: block;
+    width: 88px;
+    height: 170px;
+    padding: 10px;
+    position: relative;
+  }
+
+  &__logo-img--black,
+  &__logo-img--white {
+    position: absolute;
+    display: block;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    object-fit: cover;
+    transition: 0.3s ease-in-out;
+  }
+
+  &__logo-img--white {
+    opacity: 1;
+  }
+
+  &__logo-img--black {
+    opacity: 0;
+  }
+
+  &__box {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  &__btn {
+    width: 40px;
+    height: 170px;
+  }
+
+  &__btn-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-decoration: none;
+    background: $text-black;
+    color: $text-white;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      background: #36352d;
+    }
+  }
+}

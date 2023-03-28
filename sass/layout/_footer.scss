@@ -1,0 +1,222 @@
+//各ファイルは必ず登録済みの変数を最初に読み込みます
+//as *で読み込みファイル名を省略することができます
+@use "../global" as *;
+
+.footer {
+  padding-bottom: 70px;
+  position: relative;
+
+  &__box {
+    position: relative;
+    padding: 30px 0;
+    margin-bottom: 90px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 60px);
+      height: 1px;
+      background: $border-gray;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+  }
+
+  &__info {
+    width: 1200px;
+    margin-left: 390px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__info-txt {
+    font-size: 40px;
+    line-height: 80px;
+    letter-spacing: 0.15em;
+
+    & span {
+      font-size: 16px;
+      line-height: 32px;
+      letter-spacing: 0.3em;
+    }
+  }
+
+  &__info-ul {
+    display: flex;
+    align-items: center;
+  }
+
+  &__info-list {
+    list-style-type: none;
+  }
+
+  &__info-link {
+    display: block;
+    text-decoration: none;
+    width: 380px;
+    text-align: center;
+    color: $text-black;
+    font-size: 16px;
+    line-height: 150px;
+    letter-spacing: 0.3em;
+    border-left: 1px solid $border-gray;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%) rotate(45deg);
+      width: 8px;
+      height: 8px;
+      border-top: 1px solid $text-black;
+      border-right: 1px solid $text-black;
+      transition: 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+      right: 15px;
+    }
+  }
+
+  &__link-box {
+    width: 1200px;
+    margin-left: 390px;
+    margin-bottom: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__txt-name {
+    margin-bottom: 10px;
+    font-size: 22px;
+    line-height: 44px;
+    letter-spacing: 0.3em;
+  }
+
+  &__txt-info {
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0.3em;
+  }
+
+  &__ul {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__list {
+    list-style-type: none;
+    width: 200px;
+  }
+
+  &__link {
+    display: block;
+    padding: 5px 0 5px 15px;
+    color: $text-black;
+    font-size: 16px;
+    line-height: 32px;
+    letter-spacing: 0.3em;
+    text-decoration: none;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) rotate(45deg);
+      width: 7px;
+      height: 7px;
+      border-top: 1px solid $text-black;
+      border-right: 1px solid $text-black;
+      transition: 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+      left: 4px;
+    }
+  }
+
+  &__bottom-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1200px;
+    margin-left: 390px;
+  }
+
+  &__instagram-link {
+    display: block;
+    width: 40px;
+    height: 40px;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__instagram-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__small {
+    font-family: $garamond;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.3em;
+  }
+
+  &__back-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 30px;
+    transform: rotate(90deg);
+  }
+
+  &__back-link {
+    display: block;
+    text-decoration: none;
+    color: $text-black;
+    font-family: $garamond;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(calc(-100% - 10px), -50%);
+      width: 80px;
+      height: 1px;
+      background: $border-gray;
+      transition: 0.3s ease-in-out;
+    }
+
+    &:hover::before {
+      width: 100px;
+    }
+  }
+}

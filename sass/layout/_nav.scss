@@ -1,0 +1,342 @@
+//各ファイルは必ず登録済みの変数を最初に読み込みます
+//as *で読み込みファイル名を省略することができます
+@use "../global" as *;
+
+.gnav {
+  &.black {
+    .gnav__link {
+      color: $text-black;
+
+      &::after {
+        background: $text-black;
+      }
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__list {
+    list-style-type: none;
+  }
+
+  &__link {
+    width: fit-content;
+    display: block;
+    padding: 5px 0;
+    color: $text-white;
+    font-size: 15px;
+    line-height: 30px;
+    letter-spacing: 0.3em;
+    text-decoration: none;
+    position: relative;
+    transition: 0.3s ease-in-out;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translate(100%, -50%);
+      width: 0;
+      height: 1px;
+      background: $text-white;
+      transition: 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+      right: -10px;
+      width: 30px;
+    }
+  }
+}
+
+.hamburger-icon {
+  position: fixed;
+  top: 50px;
+  right: 60px;
+  width: 70px;
+  height: 65px;
+  cursor: pointer;
+  z-index: 100;
+
+  &.black {
+    & span {
+      background: #000;
+    }
+
+    .hamburger-icon__txt--close {
+      color: #000;
+    }
+  }
+
+  &:hover {
+    & span {
+      &:nth-of-type(2) {
+        width: calc(100% - 10px);
+      }
+
+      &:nth-of-type(3) {
+        width: calc(100% - 20px);
+      }
+    }
+  }
+
+  &.is-active {
+    & span {
+      background: #000;
+
+      &:nth-of-type(1) {
+        width: 100%;
+        top: 15px;
+        transform: rotate(45deg);
+      }
+
+      &:nth-of-type(2) {
+        opacity: 0;
+      }
+
+      &:nth-of-type(3) {
+        width: 100%;
+        top: 15px;
+        transform: rotate(-45deg);
+      }
+    }
+
+    .hamburger-icon__txt--close {
+      opacity: 0;
+    }
+
+    .hamburger-icon__txt--open {
+      opacity: 1;
+    }
+  }
+
+  & span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $text-white;
+    transition: 0.3s ease-in-out;
+
+    &:nth-of-type(1) {
+      top: 0;
+    }
+
+    &:nth-of-type(2) {
+      top: 15px;
+    }
+
+    &:nth-of-type(3) {
+      top: 30px;
+    }
+  }
+
+  &__txt--close,
+  &__txt--open {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    font-family: $garamond;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    transition: 0.3s ease-in-out;
+  }
+
+  &__txt--close {
+    color: $text-white;
+    opacity: 1;
+  }
+
+  &__txt--open {
+    color: #000;
+    opacity: 0;
+  }
+}
+
+.slide-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  transition: 0.3s ease-in-out;
+  opacity: 0;
+  z-index: -1;
+
+  &.is-active {
+    opacity: 1;
+    z-index: 99;
+  }
+
+  &__bg {
+    width: 50%;
+    height: 100%;
+    transition: 0.3s ease-in-out;
+
+    &.bg-top {
+      background: url(../images/common/gnav_top.jpg) center center / cover;
+    }
+
+    &.bg-room {
+      background: url(../images/common/gnav_room.jpg) center center / cover;
+    }
+
+    &.bg-food {
+      background: url(../images/common/gnav_food.jpg) center center / cover;
+    }
+
+    &.bg-bath {
+      background: url(../images/common/gnav_bath.jpg) center center / cover;
+    }
+
+    &.bg-about {
+      background: url(../images/common/gnav_about.jpg) center center / cover;
+    }
+
+    &.bg-institution {
+      background: url(../images/common/gnav_institution.jpg) center center / cover;
+    }
+
+    &.bg-access {
+      background: url(../images/common/gnav_access.jpg) center center / cover;
+    }
+
+    &.bg-question {
+      background: url(../images/common/gnav_question.jpg) center center / cover;
+    }
+
+    &.bg-news {
+      background: url(../images/common/gnav_news.jpg) center center / cover;
+    }
+
+    &.bg-contact {
+      background: url(../images/common/gnav_contact.jpg) center center / cover;
+    }
+  }
+
+  &__container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: $bg-gray;
+  }
+
+  &__logo {
+    margin-bottom: 20px;
+  }
+
+  &__logo-link {
+    display: block;
+    width: 88px;
+    height: 170px;
+    padding: 10px;
+  }
+
+  &__logo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__ul {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    width: 500px;
+    margin-bottom: 35px;
+  }
+
+  &__list {
+    list-style-type: none;
+    width: 50%;
+  }
+
+  &__link {
+    display: block;
+    font-size: 18px;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: 0.3em;
+    color: $text-black;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+
+    &.not-active {
+      color: $text-gray;
+    }
+  }
+
+  &__btn-wrap {
+    margin-bottom: 10px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__btn {
+    width: 100%;
+  }
+
+  &__btn-link {
+    display: block;
+    padding: 15px 0;
+    border: 1px solid $text-black;
+    color: $text-black;
+    font-size: 15px;
+    line-height: 30px;
+    letter-spacing: 0.3em;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%) rotate(45deg);
+      width: 8px;
+      height: 8px;
+      border-top: 1px solid $text-black;
+      border-right: 1px solid $text-black;
+      transition: 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+      right: 15px;
+    }
+  }
+
+  &__post,
+  &__address {
+    color: $text-black;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0.3em;
+  }
+
+  &__tel {
+    color: $text-black;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    letter-spacing: 0.3em;
+
+    & span {
+      font-size: 14px;
+    }
+  }
+}
