@@ -1,5 +1,4 @@
 $(function () {
-  // -----jQueryの記述---------------------------
 
   //ブラウザのビューポートの高さ
   const windowHeight = $(window).innerHeight();
@@ -115,18 +114,37 @@ $(function () {
   //fadeクラス付与
   function setFadeClass() {
     const st = $(window).scrollTop();
-    $('.fade').each(function () {
+    $('.fade, .fadeUp').each(function () {
       const target = $(this).offset().top;
-      if (st > target - windowHeight * 0.4) {
+      if (st > target - windowHeight * 0.5) {
         $(this).addClass('showElement');
       }
     });
+  }
+
+  //mvの表示アニメーション
+  function startMvAnimation() {
+    const st = $(window).scrollTop();
+    if (st < 50) {
+      $('.mv').addClass('startAnimation');
+      $('.mv__character').addClass('startAnimation');
+      $('.mv__info').addClass('startAnimation');
+      $('.header').addClass('startAnimation');
+      $('.hamburger-icon').addClass('startAnimation');
+    } else {
+      $('.mv').addClass('showElement');
+      $('.mv__character').addClass('showElement');
+      $('.mv__info').addClass('showElement');
+      $('.header').addClass('showElement');
+      $('.hamburger-icon').addClass('showElement');
+    }
   }
 
   //ページ読み込み時に一度実行
   showSectionNav();
   changeHeader();
   activeSectionNavLink();
+  startMvAnimation();
 
   //スクロール時のイベント設定
   $(window).on('scroll', function () {
@@ -135,6 +153,4 @@ $(function () {
     activeSectionNavLink();
     setFadeClass();
   });
-
-  // -----ここまで-------------------------------
 });

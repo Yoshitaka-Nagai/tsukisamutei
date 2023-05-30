@@ -1,5 +1,3 @@
-//各ファイルは必ず登録済みの変数を最初に読み込みます
-//as *で読み込みファイル名を省略することができます
 @use "../global" as *;
 
 .header {
@@ -12,6 +10,15 @@
   justify-content: space-between;
   align-items: center;
   z-index: 10;
+  opacity: 0;
+
+  &.showElement {
+    opacity: 1;
+  }
+
+  &.startAnimation {
+    animation: fadeIn 0.5s 2.75s ease-out forwards;
+  }
 
   &__logo {
     &.black {
