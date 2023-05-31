@@ -1,4 +1,4 @@
-//JavaScript ver
+//JavaScript
 document.addEventListener('DOMContentLoaded', function () {
   //ブラウザのビューポートの高さ
   const windowHeight = window.innerHeight;
@@ -46,8 +46,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-
-
+  //ページ内リンクナビゲーションis-activeクラス付与処理
+  function activeSectionNavLink() {
+    const st = window.scrollY;
+    const sectionList = document.querySelectorAll('.section');
+    for (let i = 0; i < sectionList.length; i++) {
+      const e = sectionList[i];
+      const styles = window.getComputedStyle(e);
+      const targetPos = e.getBoundingClientRect().top + window.scrollY;
+      const targetHeight = e.offsetHeight + parseInt(styles['margin-bottom']);
+      if (targetPos - windowHeight * 0.5 <= st && st <= targetPos + targetHeight - windowHeight * 0.5) {
+        const sectionId = '#' + e.getAttribute('id');
+        document.querySelectorAll('.section-nav__link').forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === sectionId) {
+            link.classList.add('is-active');
+          } else {
+            link.classList.remove('is-active');
+          }
+        });
+        break;
+      } else {
+        document.querySelectorAll('.section-nav__link').forEach(link => {
+          link.classList.remove('is-active');
+        });
+      }
+    }
+  }
 
   //スムーススクロール処理
   document.querySelectorAll('.section-nav__link').forEach(link => {
@@ -60,29 +85,29 @@ document.addEventListener('DOMContentLoaded', function () {
         behavior: 'smooth',
       });
     });
-  })
+  });
 
-  //   //リサイズヘッダー処理
-  //   function changeHeader() {
-  //     const st = $(window).scrollTop();
-  //     let changed = false;
-  //     $('.changeHeader').each(function () {
-  //       const targetPos = $(this).offset().top;
-  //       const targetHeight = $(this).outerHeight(true);
-  //       if (targetPos - windowHeight * 0.5 <= st && st <= targetPos + targetHeight - windowHeight * 0.5) {
-  //         $('#header__logo').addClass('black');
-  //         $('#gnav').addClass('black');
-  //         $('#hamburger-icon').addClass('black');
-  //         changed = true;
-  //       }
-  //     });
-  //     if (!changed) {
-  //       $('#header__logo').removeClass('black');
-  //       $('#gnav').removeClass('black');
-  //       $('#hamburger-icon').removeClass('black');
-  //     }
-  //   }
-
+  //リサイズヘッダー処理
+  function changeHeader() {
+    const st = window.scrollY;
+    let changed = false;
+    document.querySelectorAll('.changeHeader').forEach(e => {
+      const styles = window.getComputedStyle(e);
+      const targetPos = e.getBoundingClientRect().top + window.scrollY;
+      const targetHeight = e.offsetHeight + parseInt(styles['margin-bottom']);
+      if (targetPos - windowHeight * 0.5 <= st && st <= targetPos + targetHeight - windowHeight * 0.5) {
+        document.getElementById('header__logo').classList.add('black');
+        document.getElementById('gnav').classList.add('black');
+        document.getElementById('hamburger-icon').classList.add('black');
+        changed = true;
+      }
+    });
+    if (!changed) {
+      document.getElementById('header__logo').classList.remove('black');
+      document.getElementById('gnav').classList.remove('black');
+      document.getElementById('hamburger-icon').classList.remove('black');
+    }
+  }
 
   //ビューワー処理
   document.querySelectorAll('.gallery__tmb-link').forEach(link => {
@@ -91,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const path = this.getAttribute('href');
       document.getElementById('gallery__img').setAttribute('src', path);
     });
-  })
+  });
 
   //topへ戻るボタン
   document.getElementById('footer__back-link').addEventListener('click', function (e) {
@@ -99,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.scroll({
       top: 0,
       behavior: 'smooth',
-    })
+    });
   });
 
   //fadeクラス付与
@@ -110,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (st > target - windowHeight * 0.5) {
         e.classList.add('showElement');
       }
-    })
+    });
   }
 
   //mvの表示アニメーション
@@ -133,15 +158,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //ページ読み込み時に一度実行
   showSectionNav();
-  //changeHeader();
-  //activeSectionNavLink();
+  changeHeader();
+  activeSectionNavLink();
   startMvAnimation();
 
   //スクロール時のイベント設定
   window.addEventListener('scroll', function () {
     showSectionNav();
-    //changeHeader();
-    //activeSectionNavLink();
+    changeHeader();
+    activeSectionNavLink();
     setFadeClass();
   });
 
